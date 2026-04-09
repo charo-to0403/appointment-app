@@ -27,6 +27,11 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
+
+    if (body.action === "checkAuth") {
+      return NextResponse.json({ success: true });
+    }
+
     const res = await fetch(GAS_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
