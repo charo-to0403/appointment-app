@@ -58,6 +58,7 @@ export default function BookPage() {
   const handleBook = async (formData: {
     companyName: string;
     contactName: string;
+    email: string;
     phone: string;
     purpose: string;
   }) => {
