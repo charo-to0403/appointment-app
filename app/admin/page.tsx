@@ -39,9 +39,31 @@ export default function AdminPage() {
       );
   }, [authenticated]);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setAuthenticated(true);
+    if (!password) {
+      setMessage({ type: "error", text: "パスワードを入力してください" });
+      return;
+    }
+    try {
+      const res = await fetch("/api/settings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-admin-password": password,
+        },
+        body: JSON.stringify({ action: "checkAuth" }),
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        setMessage({ type: "error", text: data.error || "パスワードが正しくありません" });
+        return;
+      }
+      setAuthenticated(true);
+      setMessage(null);
+    } catch {
+      setMessage({ type: "error", text: "認証に失敗しました" });
+    }
   };
 
   const handleSave = async () => {
