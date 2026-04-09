@@ -41,6 +41,9 @@ export default function Home() {
           >
             libeclinic.tochigi@gmail.com
           </a>
+          <p className="text-sm text-gray-600 mt-2 font-medium">
+            うつのみやLA泌尿器科クリニック
+          </p>
         </div>
       </div>
     </main>
