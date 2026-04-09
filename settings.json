@@ -1,0 +1,7 @@
+{
+  "availableDays": [1, 2, 3, 4, 5],
+  "timeSlots": { "start": "09:00", "end": "17:00" },
+  "slotDuration": 30,
+  "calendarId": "primary",
+  "bookingWindowDays": 30
+}
