@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MR面談予約システム",
-  description: "製薬会社MR向け面談予約システム",
+  title: "予約システム",
+  description: "説明会・アポイント予約システム",
 };
 
 export default function RootLayout({
