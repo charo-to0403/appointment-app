@@ -47,8 +47,8 @@ export default function CalendarView({
 
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(currentMonth);
-  const calStart = startOfWeek(monthStart, { weekStartsOn: 1 });
-  const calEnd = endOfWeek(monthEnd, { weekStartsOn: 1 });
+  const calStart = startOfWeek(monthStart, { weekStartsOn: 0 });
+  const calEnd = endOfWeek(monthEnd, { weekStartsOn: 0 });
 
   const weeks: Date[][] = [];
   let day = calStart;
@@ -61,7 +61,7 @@ export default function CalendarView({
     weeks.push(week);
   }
 
-  const dayNames = ["月", "火", "水", "木", "金", "土", "日"];
+  const dayNames = ["日", "月", "火", "水", "木", "金", "土"];
 
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
@@ -92,7 +92,7 @@ export default function CalendarView({
           <div
             key={name}
             className={`text-center text-sm font-medium py-2 ${
-              i === 5 ? "text-blue-500" : i === 6 ? "text-red-500" : "text-gray-500"
+              i === 0 ? "text-red-500" : i === 6 ? "text-blue-500" : "text-gray-500"
             }`}
           >
             {name}
