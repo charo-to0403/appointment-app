@@ -101,11 +101,6 @@ function doPost(e) {
     var description = '種別: ' + typeLabel + '\n会社名: ' + companyName + '\n担当者: ' + contactName + '\nメール: ' + email + '\n電話番号: ' + phone + '\n内容: ' + purpose;
     var event = calendar.createEvent(title, startDate, endDate, { description: description });
 
-    // メール送信
-    var dateStr = Utilities.formatDate(startDate, 'Asia/Tokyo', 'yyyy年M月d日(E)');
-    var timeStr = Utilities.formatDate(startDate, 'Asia/Tokyo', 'HH:mm') + ' - ' + Utilities.formatDate(endDate, 'Asia/Tokyo', 'HH:mm');
-    sendBookingEmail(email, companyName, contactName, typeLabel, dateStr, timeStr, purpose);
-
     return createJsonResponse({ success: true, eventId: event.getId(), summary: title });
   } catch (err) {
     return createJsonResponse({ error: '予約の作成に失敗しました: ' + err.message });
@@ -254,32 +249,4 @@ function formatTime(date) {
   return h + ':' + m;
 }
 
-var ADMIN_EMAIL = 'libeclinic.tochigi@gmail.com';
-var CLINIC_NAME = 'うつのみやLA泌尿器科クリニック';
 
-function sendBookingEmail(mrEmail, companyName, contactName, typeLabel, dateStr, timeStr, purpose) {
-  var subject = '【予約確定】' + typeLabel + ' - ' + dateStr + ' ' + timeStr;
-
-  // 管理者への通知
-  var adminBody = typeLabel + 'の予約が入りました。\n\n'
-    + '日時: ' + dateStr + ' ' + timeStr + '\n'
-    + '種別: ' + typeLabel + '\n'
-    + '会社名: ' + companyName + '\n'
-    + '担当者: ' + contactName + '\n'
-    + 'メール: ' + mrEmail + '\n'
-    + '内容: ' + purpose + '\n';
-  MailApp.sendEmail(ADMIN_EMAIL, subject, adminBody);
-
-  // MRへの確認メール
-  var mrBody = contactName + ' 様\n\n'
-    + 'ご予約ありがとうございます。\n'
-    + '以下の内容で予約が確定しました。\n\n'
-    + '日時: ' + dateStr + ' ' + timeStr + '\n'
-    + '種別: ' + typeLabel + '\n'
-    + '会社名: ' + companyName + '\n'
-    + '担当者: ' + contactName + '\n'
-    + '内容: ' + purpose + '\n\n'
-    + '----\n'
-    + CLINIC_NAME + '\n';
-  MailApp.sendEmail(mrEmail, subject, mrBody);
-}
