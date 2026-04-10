@@ -11,6 +11,7 @@ interface TimeSlot {
 interface BookingFormProps {
   selectedDate: string;
   selectedSlot: TimeSlot;
+  bookingType?: "presentation" | "appointment";
   onSubmit: (data: {
     companyName: string;
     contactName: string;
@@ -24,6 +25,7 @@ interface BookingFormProps {
 export default function BookingForm({
   selectedDate,
   selectedSlot,
+  bookingType,
   onSubmit,
   submitting,
 }: BookingFormProps) {
@@ -114,6 +116,11 @@ export default function BookingForm({
             placeholder="例: 新薬○○の情報提供について"
             className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all resize-none text-gray-900"
           />
+          {bookingType === "presentation" && (
+            <p className="mt-2 text-sm text-gray-600">
+              お弁当をご用意いただける場合は6個、ご用意いただけますと幸いです。
+            </p>
+          )}
         </div>
 
         <button

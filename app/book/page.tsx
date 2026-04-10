@@ -199,6 +199,7 @@ export default function BookPage() {
                   <BookingForm
                     selectedDate={selectedDate}
                     selectedSlot={selectedSlot}
+                    bookingType={bookingType || undefined}
                     onSubmit={handleBook}
                     submitting={submitting}
                   />
